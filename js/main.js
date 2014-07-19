@@ -135,11 +135,6 @@ if (Key.isDown(Key.R)) {
     for (bullremovecounter = 0; bullremovecounter <= bullets.length; bullremovecounter++) {
         scene.remove(bullets[bullremovecounter]);
     }
-    for (voxremovecounter = 0; voxremovecounter <= bullets.length; voxremovecounter++) {
-        scene.remove(voxels[voxremovecounter]);
-        voxels.splice(voxremovecounter, 1);
-    }
-    initialRender();
 	bullets = [];
 	modes = [];
 	bullarrindexnum = 0;
