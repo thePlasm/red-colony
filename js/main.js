@@ -18,7 +18,7 @@ initialRender();
 var spawnz = map.length/2;
 var spawnx = map[Math.round(spawnz)].length/2;
 var spawny = map[Math.round(spawnz) - 1][Math.round(spawnx) - 1];
-camera.position.set(spawnx - 0.5, spawny + 1, spawnz - 1.5);
+camera.position.set(spawnx - 0.5, spawny + 0, spawnz - 1.5);
 camera.rotation.y = Math.PI;
 camera.position.z -= 1;
 var bullblockgeometry = new THREE.BoxGeometry(1, 1, 1);
