@@ -69,11 +69,11 @@ return this._pressed[keyCode];
     },
   
     onKeydown: function(keyevent) {
-      this._pressed[event.keyCode] = true;
+      this._pressed[keyevent.keyCode] = true;
     },
   
     onKeyup: function(keyevent) {
-      delete this._pressed[event.keyCode];
+      delete this._pressed[keyevent.keyCode];
     }
 };
 var PI_2 = Math.PI / 2;
@@ -94,8 +94,8 @@ var onMouseMove = function ( event ) {
 	}
 
 };
-window.addEventListener('keyup', function(keyevent) { Key.onKeyup(event); }, false);
-window.addEventListener('keydown', function(keyevent) { Key.onKeydown(event); }, false);
+window.addEventListener('keyup', function(keyevent) { Key.onKeyup(keyevent); }, false);
+window.addEventListener('keydown', function(keyevent) { Key.onKeydown(keyevent); }, false);
 var bullets = [];
 var bullarrindexnum = 0;
 var lastLoop = new Date;
