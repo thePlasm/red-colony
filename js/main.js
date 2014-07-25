@@ -273,7 +273,7 @@ for (counter = 0; counter < bullets.length; counter++) {
 		if (modes[counter] == "block") {
 			voxels[voxels.length] = new THREE.Mesh(voxgeometry, voxmaterial);
     		scene.add(voxels[voxels.length-1]);
-    		voxels[voxels.length-1].position.copy(bullets[counter].position);
+    		voxels[voxels.length-1].position.set(Math.round(bullets[counter].position.x), Math.round(bullets[counter].position.y), Math.round(bullets[counter].position.z));
 			scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
     		bullarrindexnum--;
