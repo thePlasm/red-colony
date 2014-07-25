@@ -3,6 +3,7 @@ var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeigh
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+var canvas = document.querySelector('canvas');
 var voxgeometry = new THREE.BoxGeometry(1, 1, 1);
 var voxmaterial = new THREE.MeshBasicMaterial( {color: 0x888888} );
 var voxarrindnum = 0;
@@ -31,7 +32,7 @@ var bullrestoregeometry = new THREE.SphereGeometry(0.1);
 var bullrestorematerial = new THREE.MeshBasicMaterial({color: 0x000000});
 var bulldestroygeometry = new THREE.SphereGeometry(0.1);
 var bulldestroymaterial = new THREE.MeshBasicMaterial({color: 0xFF0000});
-var sensitivity = 0.002;
+var sensitivity = 0.005;
 var Key = {
 _pressed: {},
 	E: 69,
@@ -56,11 +57,11 @@ _pressed: {},
 return this._pressed[keyCode];
     },
   
-    onKeydown: function(event) {
+    onKeydown: function(keyevent) {
       this._pressed[event.keyCode] = true;
     },
   
-    onKeyup: function(event) {
+    onKeyup: function(keyevent) {
       delete this._pressed[event.keyCode];
     }
 };
@@ -74,20 +75,87 @@ var onMouseMove = function ( event ) {
 	camera.rotation.y -= mouseDX * sensitivity;
 	camera.rotation.x -= mouseDY * sensitivity;
 	
-	if (this.camera.rotation.x < (-Math.PI/2)) {
-			this.camera.rotation.x = (-Math.PI/2);
+	if (camera.rotation.x < (-Math.PI/2)) {
+		camera.rotation.x = (-Math.PI/2);
 	}
-	if (this.camera.rotation.x > (Math.PI/2)) {
-		this.camera.rotation.x = (Math.PI/2);
+	if (camera.rotation.x > (Math.PI/2)) {
+		camera.rotation.x = (Math.PI/2);
 	}
 
 };
-window.addEventListener( 'mousemove', onMouseMove, false );
-window.addEventListener('keyup', function(event) { Key.onKeyup(event); }, false);
-window.addEventListener('keydown', function(event) { Key.onKeydown(event); }, false);
+window.addEventListener('keyup', function(keyevent) { Key.onKeyup(event); }, false);
+window.addEventListener('keydown', function(keyevent) { Key.onKeydown(event); }, false);
 var bullets = [];
 var bullarrindexnum = 0;
 var lastLoop = new Date;
+canvas.requestPointerLock = canvas.requestPointerLock ||
+        canvas.mozRequestPointerLock ||
+        canvas.webkitRequestPointerLock;
+
+document.exitPointerLock = document.exitPointerLock ||
+        document.mozExitPointerLock ||
+        document.webkitExitPointerLock;
+canvas.onclick = function() {
+  		canvas.requestPointerLock();
+}
+document.addEventListener('pointerlockchange', lockChangeAlert, false);
+document.addEventListener('mozpointerlockchange', lockChangeAlert, false);
+document.addEventListener('webkitpointerlockchange', lockChangeAlert, false);
+function lockChangeAlert() {
+  if(document.pointerLockElement === canvas ||
+  document.mozPointerLockElement === canvas ||
+  document.webkitPointerLockElement === canvas) {
+    console.log('The pointer lock status is now locked');
+    canvas.addEventListener( 'mousemove', onMouseMove, false );
+    canvas.addEventListener( 'click', clickInteract, false );
+  } else {
+    console.log('The pointer lock status is now unlocked');  
+    canvas.removeEventListener( 'mousemove', onMouseMove, false );
+    canvas.removeEventListener( 'click', clickInteract, false );
+  }
+}
+function clickInteract() {
+    if (mode == 'block') {
+        bullets[bullarrindexnum] = new THREE.Mesh(bullblockgeometry, bullblockmaterial);
+        scene.add(bullets[bullarrindexnum]);
+        bullets[bullarrindexnum].rotation.copy(camera.rotation);
+        bullets[bullarrindexnum].position.copy(camera.position);
+        modes[bullarrindexnum] = 'block';
+        bullarrindexnum++;
+    }
+    if (mode == 'port1') {
+        bullets[bullarrindexnum] = new THREE.Mesh(bullport1geometry, bullport1material);
+        scene.add(bullets[bullarrindexnum]);
+        bullets[bullarrindexnum].rotation.copy(camera.rotation);
+        bullets[bullarrindexnum].position.copy(camera.position);
+        modes[bullarrindexnum] = 'port1';
+        bullarrindexnum++;
+    }
+    if (mode == 'port2') {
+    	bullets[bullarrindexnum] = new THREE.Mesh(bullport2geometry, bullport2material);
+        scene.add(bullets[bullarrindexnum]);
+        bullets[bullarrindexnum].rotation.copy(camera.rotation);
+        bullets[bullarrindexnum].position.copy(camera.position);
+        modes[bullarrindexnum] = 'port2';
+        bullarrindexnum++;
+    }
+    if (mode == 'restore') {
+        bullets[bullarrindexnum] = new THREE.Mesh(bullrestoregeometry, bullrestorematerial);
+        scene.add(bullets[bullarrindexnum]);
+        bullets[bullarrindexnum].rotation.copy(camera.rotation);
+        bullets[bullarrindexnum].position.copy(camera.position);
+        modes[bullarrindexnum] = 'restore';
+        bullarrindexnum++;
+    }
+    if (mode == 'destroy') {
+        bullets[bullarrindexnum] = new THREE.Mesh(bulldestroygeometry, bulldestroymaterial);
+        scene.add(bullets[bullarrindexnum]);
+        bullets[bullarrindexnum].rotation.copy(camera.rotation);
+        bullets[bullarrindexnum].position.copy(camera.position);
+        modes[bullarrindexnum] = 'destroy';
+        bullarrindexnum++;
+    }
+}
 var render = function () {
 var thisLoop = new Date;
 var fps = 1000 / (thisLoop - lastLoop);
@@ -155,58 +223,6 @@ if (Key.isDown(Key.R)) {
 	
 }
     this.camera.rotation.order = "YXZ";
-if (Key.isDown(Key.E)) {
-    if (bullbool == true) {
-    	if (mode == 'block') {
-        	bullets[bullarrindexnum] = new THREE.Mesh(bullblockgeometry, bullblockmaterial);
-        	scene.add(bullets[bullarrindexnum]);
-        	bullets[bullarrindexnum].rotation.copy(camera.rotation);
-        	bullets[bullarrindexnum].position.copy(camera.position);
-        	modes[bullarrindexnum] = 'block';
-        	bullarrindexnum++;
-        	bullbool = false;
-        }
-        if (mode == 'port1') {
-        	bullets[bullarrindexnum] = new THREE.Mesh(bullport1geometry, bullport1material);
-        	scene.add(bullets[bullarrindexnum]);
-        	bullets[bullarrindexnum].rotation.copy(camera.rotation);
-        	bullets[bullarrindexnum].position.copy(camera.position);
-        	modes[bullarrindexnum] = 'port1';
-        	bullarrindexnum++;
-        	bullbool = false;
-        }
-        if (mode == 'port2') {
-        	bullets[bullarrindexnum] = new THREE.Mesh(bullport2geometry, bullport2material);
-        	scene.add(bullets[bullarrindexnum]);
-        	bullets[bullarrindexnum].rotation.copy(camera.rotation);
-        	bullets[bullarrindexnum].position.copy(camera.position);
-        	modes[bullarrindexnum] = 'port2';
-        	bullarrindexnum++;
-        	bullbool = false;
-        }
-        if (mode == 'restore') {
-        	bullets[bullarrindexnum] = new THREE.Mesh(bullrestoregeometry, bullrestorematerial);
-        	scene.add(bullets[bullarrindexnum]);
-        	bullets[bullarrindexnum].rotation.copy(camera.rotation);
-        	bullets[bullarrindexnum].position.copy(camera.position);
-        	modes[bullarrindexnum] = 'restore';
-        	bullarrindexnum++;
-        	bullbool = false;
-        }
-        if (mode == 'destroy') {
-        	bullets[bullarrindexnum] = new THREE.Mesh(bulldestroygeometry, bulldestroymaterial);
-        	scene.add(bullets[bullarrindexnum]);
-        	bullets[bullarrindexnum].rotation.copy(camera.rotation);
-        	bullets[bullarrindexnum].position.copy(camera.position);
-        	modes[bullarrindexnum] = 'destroy';
-        	bullarrindexnum++;
-        	bullbool = false;
-        }
-    }
-}
-if (Key.isDown(Key.E) != true) {
-    bullbool = true;
-}
 for (counter = 0; counter < bullets.length; counter++) {
     if (testCol(bullets[counter].position.x - (0.5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (0.5 * Math.tan(bullets[counter].rotation.x))/fps, bullets[counter].position.z - (0.5 * Math.cos(bullets[counter].rotation.y))/fps)) {
 		bullets[counter].position.x -= (0.5 * Math.sin(bullets[counter].rotation.y))/fps;
