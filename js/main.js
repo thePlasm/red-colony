@@ -8,7 +8,18 @@ var voxgeometry = new THREE.BoxGeometry(1, 1, 1);
 var voxmaterial = new THREE.MeshBasicMaterial( {color: 0x888888} );
 var voxarrindnum = 0;
 var altitude = 0;
-var map = [[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]];
+var map = [
+[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
+[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
+[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
+[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
+[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
+[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
+[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
+[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
+[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
+[10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+];
 var voxels = [];
 var bounds = [];
 var modes = [];
@@ -58,11 +69,11 @@ return this._pressed[keyCode];
     },
   
     onKeydown: function(keyevent) {
-      this._pressed[event.keyCode] = true;
+      this._pressed[keyevent.keyCode] = true;
     },
   
     onKeyup: function(keyevent) {
-      delete this._pressed[event.keyCode];
+      delete this._pressed[keyevent.keyCode];
     }
 };
 var PI_2 = Math.PI / 2;
@@ -83,8 +94,8 @@ var onMouseMove = function ( event ) {
 	}
 
 };
-window.addEventListener('keyup', function(keyevent) { Key.onKeyup(event); }, false);
-window.addEventListener('keydown', function(keyevent) { Key.onKeydown(event); }, false);
+window.addEventListener('keyup', function(keyevent) { Key.onKeyup(keyevent); }, false);
+window.addEventListener('keydown', function(keyevent) { Key.onKeydown(keyevent); }, false);
 var bullets = [];
 var bullarrindexnum = 0;
 var lastLoop = new Date;
@@ -262,7 +273,7 @@ for (counter = 0; counter < bullets.length; counter++) {
 		if (modes[counter] == "block") {
 			voxels[voxels.length] = new THREE.Mesh(voxgeometry, voxmaterial);
     		scene.add(voxels[voxels.length-1]);
-    		voxels[voxels.length-1].position.copy(bullets[counter].position);
+    		voxels[voxels.length-1].position.set(Math.round(bullets[counter].position.x), Math.round(bullets[counter].position.y), Math.round(bullets[counter].position.z));
 			scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
     		bullarrindexnum--;
