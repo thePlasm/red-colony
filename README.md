@@ -1,7 +1,7 @@
 fps-cube-game
 =============
 
-My FPS Voxel Game using three.js. (Probably going to be for MiniLD 53)
+My FPS Voxel Game using three.js and pointer lock API.
 
 
 Controls:
@@ -18,4 +18,4 @@ Controls:
 Credits:
 --------
 
-Made by Rasmus Jepsen, with three.js.
+Made by Rasmus Jepsen, with three.js and pointer lock API.
