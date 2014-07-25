@@ -31,6 +31,7 @@ var bullrestoregeometry = new THREE.SphereGeometry(0.1);
 var bullrestorematerial = new THREE.MeshBasicMaterial({color: 0x000000});
 var bulldestroygeometry = new THREE.SphereGeometry(0.1);
 var bulldestroymaterial = new THREE.MeshBasicMaterial({color: 0xFF0000});
+var sensitivity = 0.002;
 var Key = {
 _pressed: {},
 	E: 69,
@@ -63,6 +64,25 @@ return this._pressed[keyCode];
       delete this._pressed[event.keyCode];
     }
 };
+var PI_2 = Math.PI / 2;
+
+var onMouseMove = function ( event ) {
+
+	var mouseDX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+	var mouseDY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+
+	camera.rotation.y -= mouseDX * sensitivity;
+	camera.rotation.x -= mouseDY * sensitivity;
+	
+	if (this.camera.rotation.x < (-Math.PI/2)) {
+			this.camera.rotation.x = (-Math.PI/2);
+	}
+	if (this.camera.rotation.x > (Math.PI/2)) {
+		this.camera.rotation.x = (Math.PI/2);
+	}
+
+};
+window.addEventListener( 'mousemove', onMouseMove, false );
 window.addEventListener('keyup', function(event) { Key.onKeyup(event); }, false);
 window.addEventListener('keydown', function(event) { Key.onKeydown(event); }, false);
 var bullets = [];
@@ -123,12 +143,6 @@ if (Key.isDown(Key.D)) {
 			this.camera.position.y -= 1 / fps;
 		}
 	}
-    if (Key.isDown(Key.LEFT)) {
-    this.camera.rotation.y += 3 / fps;
-    }
-    if (Key.isDown(Key.RIGHT)) {
-    this.camera.rotation.y -= 3 / fps;
-    }
 if (Key.isDown(Key.R)) {
     camera.rotation.set(0, 0, 0);
     camera.position.set(spawnx - 0.5, spawny + 1, spawnz - 0.5);
@@ -140,24 +154,6 @@ if (Key.isDown(Key.R)) {
 	bullarrindexnum = 0;
 	
 }
-    if (Key.isDown(Key.UP)) {
-    	this.camera.rotation.x += 3 / fps;
-    	if (this.camera.rotation.x < (-Math.PI/2)) {
-			this.camera.rotation.x = (-Math.PI/2);
-		}
-		if (this.camera.rotation.x > (Math.PI/2)) {
-			this.camera.rotation.x = (Math.PI/2);
-		}
-    }
-    if (Key.isDown(Key.DOWN)) {
-    	this.camera.rotation.x -= 3 / fps;
-    	if (this.camera.rotation.x < (-Math.PI/2)) {
-			this.camera.rotation.x = (-Math.PI/2);
-		}
-		if (this.camera.rotation.x > (Math.PI/2)) {
-			this.camera.rotation.x = (Math.PI/2);
-		}
-    }
     this.camera.rotation.order = "YXZ";
 if (Key.isDown(Key.E)) {
     if (bullbool == true) {
