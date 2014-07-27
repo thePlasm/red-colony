@@ -30,9 +30,7 @@ initialRender();
 var spawnz = map.length/2;
 var spawnx = map[Math.round(spawnz)].length/2;
 var spawny = map[Math.round(spawnz) - 1][Math.round(spawnx) - 1];
-camera.position.set(spawnx - 0.5, spawny + 1, spawnz - 0.5);
-camera.rotation.y = Math.PI;
-camera.position.z -= 1;
+camera.position.set(spawnx - 0.5, spawny + 1.75, spawnz - 0.5);
 var bullblockgeometry = new THREE.BoxGeometry(1, 1, 1);
 var bullblockmaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF});
 var bullport1geometry = new THREE.SphereGeometry(0.1);
@@ -189,25 +187,25 @@ if (Key.isDown(Key.FIVE)) {
 	mode = "destroy";
 }
 if (Key.isDown(Key.W)) {
-	if (testCol(camera.position.x - (Math.sin(this.camera.rotation.y) / fps), camera.position.y-1, camera.position.z - (Math.cos(this.camera.rotation.y) / fps)) && testCol(camera.position.x - (Math.sin(this.camera.rotation.y) / fps), camera.position.y, camera.position.z - (Math.cos(this.camera.rotation.y) / fps))) {
+	if (testCol(camera.position.x - (Math.sin(this.camera.rotation.y) / fps), camera.position.y-1.75, camera.position.z - (Math.cos(this.camera.rotation.y) / fps)) && testCol(camera.position.x - (Math.sin(this.camera.rotation.y) / fps), camera.position.y, camera.position.z - (Math.cos(this.camera.rotation.y) / fps))) {
 		this.camera.position.x -= 1 * Math.sin(this.camera.rotation.y) / fps;
 		this.camera.position.z -= 1 * Math.cos(this.camera.rotation.y) / fps;
 	}
 }
 if (Key.isDown(Key.A)) {
-	if (testCol(camera.position.x - (Math.sin(this.camera.rotation.y + Math.PI/2) / fps), camera.position.y-1, camera.position.z - (Math.cos(this.camera.rotation.y + Math.PI/2) / fps)) && testCol(camera.position.x - (Math.sin(this.camera.rotation.y + Math.PI/2) / fps), camera.position.y, camera.position.z - (Math.cos(this.camera.rotation.y + Math.PI/2) / fps))) {
+	if (testCol(camera.position.x - (Math.sin(this.camera.rotation.y + Math.PI/2) / fps), camera.position.y-1.75, camera.position.z - (Math.cos(this.camera.rotation.y + Math.PI/2) / fps)) && testCol(camera.position.x - (Math.sin(this.camera.rotation.y + Math.PI/2) / fps), camera.position.y, camera.position.z - (Math.cos(this.camera.rotation.y + Math.PI/2) / fps))) {
 		this.camera.position.x -= 1 * Math.sin(this.camera.rotation.y + Math.PI/2) / fps;
 		this.camera.position.z -= 1 * Math.cos(this.camera.rotation.y + Math.PI/2) / fps;
 	}
 }
 if (Key.isDown(Key.S)) {
-	if (testCol(camera.position.x + (Math.sin(this.camera.rotation.y) / fps), camera.position.y-1, camera.position.z + (Math.cos(this.camera.rotation.y) / fps)) && testCol(camera.position.x + (Math.sin(this.camera.rotation.y) / fps), camera.position.y, camera.position.z + (Math.cos(this.camera.rotation.y) / fps))) {
+	if (testCol(camera.position.x + (Math.sin(this.camera.rotation.y) / fps), camera.position.y-1.75, camera.position.z + (Math.cos(this.camera.rotation.y) / fps)) && testCol(camera.position.x + (Math.sin(this.camera.rotation.y) / fps), camera.position.y, camera.position.z + (Math.cos(this.camera.rotation.y) / fps))) {
     	this.camera.position.x += 1 * Math.sin(this.camera.rotation.y) / fps;
 		this.camera.position.z += 1 * Math.cos(this.camera.rotation.y) / fps;
 	}
 }
 if (Key.isDown(Key.D)) {
-	if (testCol(camera.position.x - (Math.sin(this.camera.rotation.y - Math.PI/2) / fps), camera.position.y-1, camera.position.z - (Math.cos(this.camera.rotation.y - Math.PI/2) / fps)) && testCol(camera.position.x - (Math.sin(this.camera.rotation.y - Math.PI/2) / fps), camera.position.y, camera.position.z - (Math.cos(this.camera.rotation.y - Math.PI/2) / fps))) {
+	if (testCol(camera.position.x - (Math.sin(this.camera.rotation.y - Math.PI/2) / fps), camera.position.y-1.75, camera.position.z - (Math.cos(this.camera.rotation.y - Math.PI/2) / fps)) && testCol(camera.position.x - (Math.sin(this.camera.rotation.y - Math.PI/2) / fps), camera.position.y, camera.position.z - (Math.cos(this.camera.rotation.y - Math.PI/2) / fps))) {
     	this.camera.position.x -= 1 * Math.sin(this.camera.rotation.y - Math.PI/2) / fps;
 		this.camera.position.z -= 1 * Math.cos(this.camera.rotation.y - Math.PI/2) / fps;
     }
@@ -218,13 +216,16 @@ if (Key.isDown(Key.D)) {
 		}
     }
     if (Key.isDown(Key.SHIFT)) {
-		if (testCol(camera.position.x, (camera.position.y - 1 / fps)-1, camera.position.z)) {
+		if (testCol(camera.position.x, (camera.position.y - 1 / fps)-1.75, camera.position.z)) {
 			this.camera.position.y -= 1 / fps;
 		}
 	}
 if (Key.isDown(Key.R)) {
     camera.rotation.set(0, 0, 0);
-    camera.position.set(spawnx - 0.5, spawny + 1, spawnz - 0.5);
+    var spawnz = map.length/2;
+	var spawnx = map[Math.round(spawnz)].length/2;
+	var spawny = map[Math.round(spawnz) - 1][Math.round(spawnx) - 1];
+	camera.position.set(spawnx - 0.5, spawny + 1.75, spawnz - 0.5);
     for (bullremovecounter = 0; bullremovecounter <= bullets.length; bullremovecounter++) {
         scene.remove(bullets[bullremovecounter]);
     }
@@ -246,6 +247,7 @@ for (counter = 0; counter < bullets.length; counter++) {
 			voxels[voxcolbulltempnum].material = new THREE.MeshBasicMaterial( {color: 0xFFCC00} );
     		scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
+    		modes.splice(counter, 1);
 			bullarrindexnum--;
     	}
     	if (modes[counter] == "port2") {
@@ -253,6 +255,7 @@ for (counter = 0; counter < bullets.length; counter++) {
     		voxels[voxcolbulltempnum].material = new THREE.MeshBasicMaterial( {color: 0x00CCFF} );
     		scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
+    		modes.splice(counter, 1);
 			bullarrindexnum--;
     	}
 		if (modes[counter] == "restore") {
@@ -260,6 +263,7 @@ for (counter = 0; counter < bullets.length; counter++) {
 			voxels[voxcolbulltempnum].material = new THREE.MeshBasicMaterial( {color: 0x888888} );
     		scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
+    		modes.splice(counter, 1);
     		bullarrindexnum--;
 		}
 		if (modes[counter] == "destroy") {
@@ -268,6 +272,7 @@ for (counter = 0; counter < bullets.length; counter++) {
 			voxels.splice(voxcolbulltempnum, 1);
     		scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
+    		modes.splice(counter, 1);
     		bullarrindexnum--;
 		}
 		if (modes[counter] == "block") {
@@ -276,6 +281,7 @@ for (counter = 0; counter < bullets.length; counter++) {
     		voxels[voxels.length-1].position.set(Math.round(bullets[counter].position.x), Math.round(bullets[counter].position.y), Math.round(bullets[counter].position.z));
 			scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
+    		modes.splice(counter, 1);
     		bullarrindexnum--;
 		}
     }
