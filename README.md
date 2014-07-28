@@ -1,14 +1,15 @@
-fps-cube-game
+Red Colony
 =============
 
-My FPS Voxel Game using three.js and pointer lock API.
+Red Colony
 
 
 Controls:
 ---------
 
 * WASD Motion
-* Arrow key camera rotation
+* Mouse camera rotation
+* Left Click shooting
 * 1 & 2: Orange and Blue
 * 3: Place a voxel
 * 4: Restore voxel
