@@ -30,11 +30,48 @@
 
 			#hud {
     			z-index: 10;
-    			top:48.75%;
-    			left:0%;
     			margin: 0px;
+				position: fixed;
+			}
+			#hud img{
+				height:11px;
+				width:11px;
+				top:50%;
+    			left: calc(50% - 11px/2);
+				left: -moz-calc(50% - 11px/2);
+				left: -o-calc(50% - 11px/2);
+				left: -webkit-calc(50% - 11px/2);
+				position: fixed;
+			}
+			#info {
+				colour: #FFCC00;
+				font-size:50%;
+				width:200px;
+				top:0%;
+				left: calc(50% - 200px/2);
+				left: -moz-calc(50% - 200px/2);
+				left: -o-calc(50% - 200px/2);
+				left: -webkit-calc(50% - 200px/2);
+				position: fixed;
+				border: 1px solid #003b6f;
+				background-color: #00CCFF;
+			}
+			#showbutton {
+				colour: #FFCC00;
+				font-size:50%;
+				width:75px;
+				height:10px;
+				top:0%;
+				left: calc(100% - 75px);
+				left: -moz-calc(100% - 75px);
+				left: -o-calc(100% - 75px);
+				left: -webkit-calc(100% - 75px);
+				position: fixed;
+				border: 1px solid #003b6f;
+				background-color: #00CCFF;
 			}
 		</style>
+		<!-- use css calc() cross browser -->
 		<script>
 			window.onkeydown=function(e){
   				if(e.keyCode==32) {
@@ -50,18 +87,24 @@
 		</script>
 	</head>
 	<body>
-		<div id="hud"><img src="media/Crosshairs.png"></div>
 		<script src="js/three.min.js"></script>
 		<script src="js/main.js"></script>
-		<h1>
-			Red Colony
-		</h1>
-		<h2>
-			By Rasmus Jepsen, with three.js.
-		</h2>
-		<p>
-			Instructions can be found <a href='README.md'>here.</a><br />
-			The license file can be found <a href='LICENSE.md'>here.</a>
-		</p>
+		<div id="hud">
+			<div id='info' onclick='this.innerHTML=""; document.getElementById("showbutton").innerHTML="Click to show info";'>
+				<h1>
+					Red Colony
+				</h1>
+				<h2>
+					By Rasmus Jepsen, with three.js.
+				</h2>
+				<p>
+					Instructions can be found <a href='README.md'>here.</a><br />
+					The license file can be found <a href='LICENSE.md'>here.</a>
+				</p>
+			</div>
+			<img src="media/Crosshairs.png">
+			<div id='showbutton' onclick='this.innerHTML=""; document.getElementById("info").innerHTML="<h1>Red Colony</h1><h2>By Rasmus Jepsen, with three.js.</h2><p>Instructions can be found <a href=\"README.md\">here.</a><br />The license file can be found <a href=\"LICENSE.md\">here.</a></p>";'>
+			</div> 
+		</div>
 	</body>
 </html>

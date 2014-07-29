@@ -9,16 +9,16 @@ var voxmaterial = new THREE.MeshBasicMaterial( {color: 0x888888} );
 var voxarrindnum = 0;
 var altitude = 0;
 var map = [
-[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
-[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
-[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
-[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
-[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
-[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
-[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
-[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
-[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 
-[10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+[Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1)], 
+[Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1)], 
+[Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1)], 
+[Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1)], 
+[Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1)], 
+[Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1)], 
+[Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1)], 
+[Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1)], 
+[Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1)], 
+[Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1), Math.round((Math.random() * 10) + 1)]
 ];
 var voxels = [];
 var bounds = [];
@@ -107,6 +107,9 @@ document.exitPointerLock = document.exitPointerLock ||
 canvas.onclick = function() {
   		canvas.requestPointerLock();
 }
+window.onclick = function() {
+  		canvas.requestPointerLock();
+}
 document.addEventListener('pointerlockchange', lockChangeAlert, false);
 document.addEventListener('mozpointerlockchange', lockChangeAlert, false);
 document.addEventListener('webkitpointerlockchange', lockChangeAlert, false);
@@ -187,37 +190,37 @@ if (Key.isDown(Key.FIVE)) {
 	mode = "destroy";
 }
 if (Key.isDown(Key.W)) {
-	if (testCol(camera.position.x - (Math.sin(this.camera.rotation.y) / fps), camera.position.y-1.75, camera.position.z - (Math.cos(this.camera.rotation.y) / fps)) && testCol(camera.position.x - (Math.sin(this.camera.rotation.y) / fps), camera.position.y, camera.position.z - (Math.cos(this.camera.rotation.y) / fps))) {
-		this.camera.position.x -= 1 * Math.sin(this.camera.rotation.y) / fps;
-		this.camera.position.z -= 1 * Math.cos(this.camera.rotation.y) / fps;
+	if (testCol(camera.position.x - 2 * (Math.sin(this.camera.rotation.y) / fps), camera.position.y-1.75, camera.position.z - 2 * (Math.cos(this.camera.rotation.y) / fps)) && testCol(camera.position.x - 2 * (Math.sin(this.camera.rotation.y) / fps), camera.position.y, camera.position.z - 2 * (Math.cos(this.camera.rotation.y) / fps))) {
+		this.camera.position.x -= 2 * Math.sin(this.camera.rotation.y) / fps;
+		this.camera.position.z -= 2 * Math.cos(this.camera.rotation.y) / fps;
 	}
 }
 if (Key.isDown(Key.A)) {
-	if (testCol(camera.position.x - (Math.sin(this.camera.rotation.y + Math.PI/2) / fps), camera.position.y-1.75, camera.position.z - (Math.cos(this.camera.rotation.y + Math.PI/2) / fps)) && testCol(camera.position.x - (Math.sin(this.camera.rotation.y + Math.PI/2) / fps), camera.position.y, camera.position.z - (Math.cos(this.camera.rotation.y + Math.PI/2) / fps))) {
-		this.camera.position.x -= 1 * Math.sin(this.camera.rotation.y + Math.PI/2) / fps;
-		this.camera.position.z -= 1 * Math.cos(this.camera.rotation.y + Math.PI/2) / fps;
+	if (testCol(camera.position.x - 2 * (Math.sin(this.camera.rotation.y + Math.PI/2) / fps), camera.position.y-1.75, camera.position.z - 2 * (Math.cos(this.camera.rotation.y + Math.PI/2) / fps)) && testCol(camera.position.x - 2 * (Math.sin(this.camera.rotation.y + Math.PI/2) / fps), camera.position.y, camera.position.z - 2 * (Math.cos(this.camera.rotation.y + Math.PI/2) / fps))) {
+		this.camera.position.x -= 2 * Math.sin(this.camera.rotation.y + Math.PI/2) / fps;
+		this.camera.position.z -= 2 * Math.cos(this.camera.rotation.y + Math.PI/2) / fps;
 	}
 }
 if (Key.isDown(Key.S)) {
-	if (testCol(camera.position.x + (Math.sin(this.camera.rotation.y) / fps), camera.position.y-1.75, camera.position.z + (Math.cos(this.camera.rotation.y) / fps)) && testCol(camera.position.x + (Math.sin(this.camera.rotation.y) / fps), camera.position.y, camera.position.z + (Math.cos(this.camera.rotation.y) / fps))) {
-    	this.camera.position.x += 1 * Math.sin(this.camera.rotation.y) / fps;
-		this.camera.position.z += 1 * Math.cos(this.camera.rotation.y) / fps;
+	if (testCol(camera.position.x + 2 * (Math.sin(this.camera.rotation.y) / fps), camera.position.y-1.75, camera.position.z + 2 * (Math.cos(this.camera.rotation.y) / fps)) && testCol(camera.position.x + 2 * (Math.sin(this.camera.rotation.y) / fps), camera.position.y, camera.position.z + 2 * (Math.cos(this.camera.rotation.y) / fps))) {
+    	this.camera.position.x += 2 * Math.sin(this.camera.rotation.y) / fps;
+		this.camera.position.z += 2 * Math.cos(this.camera.rotation.y) / fps;
 	}
 }
 if (Key.isDown(Key.D)) {
-	if (testCol(camera.position.x - (Math.sin(this.camera.rotation.y - Math.PI/2) / fps), camera.position.y-1.75, camera.position.z - (Math.cos(this.camera.rotation.y - Math.PI/2) / fps)) && testCol(camera.position.x - (Math.sin(this.camera.rotation.y - Math.PI/2) / fps), camera.position.y, camera.position.z - (Math.cos(this.camera.rotation.y - Math.PI/2) / fps))) {
-    	this.camera.position.x -= 1 * Math.sin(this.camera.rotation.y - Math.PI/2) / fps;
-		this.camera.position.z -= 1 * Math.cos(this.camera.rotation.y - Math.PI/2) / fps;
+	if (testCol(camera.position.x - 2 * (Math.sin(this.camera.rotation.y - Math.PI/2) / fps), camera.position.y-1.75, camera.position.z - 2 * (Math.cos(this.camera.rotation.y - Math.PI/2) / fps)) && testCol(camera.position.x - 2 * (Math.sin(this.camera.rotation.y - Math.PI/2) / fps), camera.position.y, camera.position.z - 2 * (Math.cos(this.camera.rotation.y - Math.PI/2) / fps))) {
+    	this.camera.position.x -= 2 * Math.sin(this.camera.rotation.y - Math.PI/2) / fps;
+		this.camera.position.z -= 2 * Math.cos(this.camera.rotation.y - Math.PI/2) / fps;
     }
 }
     if (Key.isDown(Key.SPACE)) {
-		if (testCol(camera.position.x, (camera.position.y + 1 / fps), camera.position.z)) {
-			this.camera.position.y += 1 / fps;
+		if (testCol(camera.position.x, (camera.position.y + 2 / fps), camera.position.z)) {
+			this.camera.position.y += 2 / fps;
 		}
     }
     if (Key.isDown(Key.SHIFT)) {
-		if (testCol(camera.position.x, (camera.position.y - 1 / fps)-1.75, camera.position.z)) {
-			this.camera.position.y -= 1 / fps;
+		if (testCol(camera.position.x, (camera.position.y - 2 / fps)-1.75, camera.position.z)) {
+			this.camera.position.y -= 2 / fps;
 		}
 	}
 if (Key.isDown(Key.R)) {
