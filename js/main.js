@@ -2,12 +2,17 @@ var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor( 0xf4aa76, 1);
 document.body.appendChild(renderer.domElement);
 var canvas = document.querySelector('canvas');
 var voxgeometry = new THREE.BoxGeometry(1, 1, 1);
-var voxmaterial = new THREE.MeshBasicMaterial( {color: 0x888888} );
+var voxmaterial1 = new THREE.MeshBasicMaterial( {color: 0xF06D41} );
+var voxmaterial2 = new THREE.MeshBasicMaterial( {color: 0xCC6E4E} );
+var voxmaterial3 = new THREE.MeshBasicMaterial( {color: 0xC44318} );
 var voxarrindnum = 0;
 var altitude = 0;
+var colourOrder = 0;
+var initColours = [];
 var map = [
 [Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1)], 
 [Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1), Math.round((Math.random() * 9) + 1)], 
@@ -263,7 +268,7 @@ for (counter = 0; counter < bullets.length; counter++) {
     	}
 		if (modes[counter] == "restore") {
     		voxcolbulltempnum = findCol(bullets[counter].position.x - (0.5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (0.5 * Math.tan(bullets[counter].rotation.x))/fps - 0.5, bullets[counter].position.z - (0.5 * Math.cos(bullets[counter].rotation.y))/fps);
-			voxels[voxcolbulltempnum].material = new THREE.MeshBasicMaterial( {color: 0x888888} );
+			restoration(voxcolbulltempnum);
     		scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
     		modes.splice(counter, 1);
@@ -320,7 +325,7 @@ function initialRender() {
 		for (x = 0; x < map[z].length; x++) {
 			altitude = map[z][x];
 			for (y = 0; y < altitude; y++) {
-				voxels[voxarrindnum] = new THREE.Mesh(voxgeometry, voxmaterial);
+				specialColours();
 				scene.add(voxels[voxarrindnum]);
 				voxels[voxarrindnum].position.x = x;
 				voxels[voxarrindnum].position.y = y;
@@ -328,5 +333,36 @@ function initialRender() {
 				voxarrindnum++;
 			}
 		}
+	}
+}
+function specialColours() {
+	if (colourOrder == 0) {
+		voxels[voxarrindnum] = new THREE.Mesh(voxgeometry, voxmaterial1);
+		colourOrder++;
+		initColours[voxarrindnum] = 0;
+		return null;
+	}
+	if (colourOrder == 1) {
+		voxels[voxarrindnum] = new THREE.Mesh(voxgeometry, voxmaterial2);
+		colourOrder++;
+		initColours[voxarrindnum] = 1;
+		return null;
+	}
+	if (colourOrder == 2) {
+		voxels[voxarrindnum] = new THREE.Mesh(voxgeometry, voxmaterial3);
+		colourOrder = 0;
+		initColours[voxarrindnum] = 2;
+		return null;
+	}
+}
+function restoration(f) {
+	if (initColours[f] == 0) {
+		voxels[f].material = voxmaterial1;
+	}
+	if (initColours[f] == 1) {
+		voxels[f].material = voxmaterial2;
+	}
+	if (initColours[f] == 2) {
+		voxels[f].material = voxmaterial3;
 	}
 }
