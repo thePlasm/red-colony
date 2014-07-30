@@ -6,6 +6,7 @@ renderer.setClearColor( 0xf4aa76, 1);
 document.body.appendChild(renderer.domElement);
 var canvas = document.querySelector('canvas');
 var voxgeometry = new THREE.BoxGeometry(1, 1, 1);
+var voxmaterial = new THREE.MeshBasicMaterial( {color: 0x888888} );
 var voxmaterial1 = new THREE.MeshBasicMaterial( {color: 0xF06D41} );
 var voxmaterial2 = new THREE.MeshBasicMaterial( {color: 0xCC6E4E} );
 var voxmaterial3 = new THREE.MeshBasicMaterial( {color: 0xC44318} );
@@ -278,12 +279,14 @@ for (counter = 0; counter < bullets.length; counter++) {
     		voxcolbulltempnum = findCol(bullets[counter].position.x - (0.5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (0.5 * Math.tan(bullets[counter].rotation.x))/fps - 0.5, bullets[counter].position.z - (0.5 * Math.cos(bullets[counter].rotation.y))/fps);
     		scene.remove(voxels[voxcolbulltempnum]);
 			voxels.splice(voxcolbulltempnum, 1);
+			initColours.splice(voxcolbulltempnum, 1);
     		scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
     		modes.splice(counter, 1);
     		bullarrindexnum--;
 		}
 		if (modes[counter] == "block") {
+			initColours[voxels.length] = 3;
 			voxels[voxels.length] = new THREE.Mesh(voxgeometry, voxmaterial);
     		scene.add(voxels[voxels.length-1]);
     		voxels[voxels.length-1].position.set(Math.round(bullets[counter].position.x), Math.round(bullets[counter].position.y), Math.round(bullets[counter].position.z));
@@ -364,5 +367,8 @@ function restoration(f) {
 	}
 	if (initColours[f] == 2) {
 		voxels[f].material = voxmaterial3;
+	}
+	if (initColours[f] == 3) {
+		voxels[f].material = voxmaterial;
 	}
 }
