@@ -3,13 +3,47 @@ var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeigh
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor( 0xf4aa76, 1);
+renderer.shadowMapEnabled = true;
+renderer.shadowMapSoft = false;
 document.body.appendChild(renderer.domElement);
 var canvas = document.querySelector('canvas');
+var lightIncreasing = false;
+var lightIntensity = 1;
+var directionalLight1 = new THREE.DirectionalLight( 0xffffff, lightIntensity);
+directionalLight1.position.set(0, 1, 0);
+scene.add(directionalLight1);
+directionalLight1.shadowCameraNear = 0.01;
+directionalLight1.castShadow = true;
+directionalLight1.shadowDarkness = 0.5;
+var directionalLight2 = new THREE.DirectionalLight( 0xffffff, lightIntensity);
+directionalLight2.position.set(1, 1, 0);
+scene.add(directionalLight2);
+directionalLight2.shadowCameraNear = 0.01;
+directionalLight2.castShadow = true;
+directionalLight2.shadowDarkness = 0.5;
+var directionalLight3 = new THREE.DirectionalLight( 0xffffff, lightIntensity);
+directionalLight3.position.set(0, 1, 1);
+scene.add(directionalLight3);
+directionalLight3.shadowCameraNear = 0.01;
+directionalLight3.castShadow = true;
+directionalLight3.shadowDarkness = 0.5;
+var directionalLight5 = new THREE.DirectionalLight( 0xffffff, lightIntensity);
+directionalLight5.position.set(-1, 1, 0);
+scene.add(directionalLight5);
+directionalLight5.shadowCameraNear = 0.01;
+directionalLight5.castShadow = true;
+directionalLight5.shadowDarkness = 0.5;
+var directionalLight6 = new THREE.DirectionalLight( 0xffffff, lightIntensity);
+directionalLight6.position.set(0, 1, -1);
+scene.add(directionalLight6);
+directionalLight6.shadowCameraNear = 0.01;
+directionalLight6.castShadow = true;
+directionalLight6.shadowDarkness = 0.5;
 var voxgeometry = new THREE.BoxGeometry(1, 1, 1);
-var voxmaterial = new THREE.MeshBasicMaterial( {color: 0x888888} );
-var voxmaterial1 = new THREE.MeshBasicMaterial( {color: 0xF06D41} );
-var voxmaterial2 = new THREE.MeshBasicMaterial( {color: 0xCC6E4E} );
-var voxmaterial3 = new THREE.MeshBasicMaterial( {color: 0xC44318} );
+var voxmaterial = new THREE.MeshLambertMaterial( {color: 0x888888} );
+var voxmaterial1 = new THREE.MeshLambertMaterial( {color: 0xF06D41} );
+var voxmaterial2 = new THREE.MeshLambertMaterial( {color: 0xCC6E4E} );
+var voxmaterial3 = new THREE.MeshLambertMaterial( {color: 0xC44318} );
 var voxarrindnum = 0;
 var altitude = 0;
 var colourOrder = 0;
@@ -38,15 +72,15 @@ var spawnx = map[Math.round(spawnz)].length/2;
 var spawny = map[Math.round(spawnz) - 1][Math.round(spawnx) - 1];
 camera.position.set(spawnx - 0.5, spawny + 1.75, spawnz - 0.5);
 var bullblockgeometry = new THREE.BoxGeometry(1, 1, 1);
-var bullblockmaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF});
+var bullblockmaterial = new THREE.MeshLambertMaterial({color: 0xFFFFFF});
 var bullport1geometry = new THREE.SphereGeometry(0.1);
-var bullport1material = new THREE.MeshBasicMaterial({color: 0xFFCC00});
+var bullport1material = new THREE.MeshLambertMaterial({color: 0xFFCC00});
 var bullport2geometry = new THREE.SphereGeometry(0.1);
-var bullport2material = new THREE.MeshBasicMaterial({color: 0x00CCFF});
+var bullport2material = new THREE.MeshLambertMaterial({color: 0x00CCFF});
 var bullrestoregeometry = new THREE.SphereGeometry(0.1);
-var bullrestorematerial = new THREE.MeshBasicMaterial({color: 0x000000});
+var bullrestorematerial = new THREE.MeshLambertMaterial({color: 0x000000});
 var bulldestroygeometry = new THREE.SphereGeometry(0.1);
-var bulldestroymaterial = new THREE.MeshBasicMaterial({color: 0xFF0000});
+var bulldestroymaterial = new THREE.MeshLambertMaterial({color: 0xFF0000});
 var sensitivity = 0.005;
 var Key = {
 _pressed: {},
@@ -138,6 +172,8 @@ function clickInteract() {
         scene.add(bullets[bullarrindexnum]);
         bullets[bullarrindexnum].rotation.copy(camera.rotation);
         bullets[bullarrindexnum].position.copy(camera.position);
+        bullets[bullarrindexnum].castShadow = true;
+		bullets[bullarrindexnum].receiveShadow = true;
         modes[bullarrindexnum] = 'block';
         bullarrindexnum++;
     }
@@ -146,6 +182,8 @@ function clickInteract() {
         scene.add(bullets[bullarrindexnum]);
         bullets[bullarrindexnum].rotation.copy(camera.rotation);
         bullets[bullarrindexnum].position.copy(camera.position);
+        bullets[bullarrindexnum].castShadow = true;
+		bullets[bullarrindexnum].receiveShadow = true;
         modes[bullarrindexnum] = 'port1';
         bullarrindexnum++;
     }
@@ -154,6 +192,8 @@ function clickInteract() {
         scene.add(bullets[bullarrindexnum]);
         bullets[bullarrindexnum].rotation.copy(camera.rotation);
         bullets[bullarrindexnum].position.copy(camera.position);
+        bullets[bullarrindexnum].castShadow = true;
+		bullets[bullarrindexnum].receiveShadow = true;
         modes[bullarrindexnum] = 'port2';
         bullarrindexnum++;
     }
@@ -162,6 +202,8 @@ function clickInteract() {
         scene.add(bullets[bullarrindexnum]);
         bullets[bullarrindexnum].rotation.copy(camera.rotation);
         bullets[bullarrindexnum].position.copy(camera.position);
+        bullets[bullarrindexnum].castShadow = true;
+		bullets[bullarrindexnum].receiveShadow = true;
         modes[bullarrindexnum] = 'restore';
         bullarrindexnum++;
     }
@@ -170,13 +212,16 @@ function clickInteract() {
         scene.add(bullets[bullarrindexnum]);
         bullets[bullarrindexnum].rotation.copy(camera.rotation);
         bullets[bullarrindexnum].position.copy(camera.position);
+        bullets[bullarrindexnum].castShadow = true;
+		bullets[bullarrindexnum].receiveShadow = true;
         modes[bullarrindexnum] = 'destroy';
         bullarrindexnum++;
     }
 }
+var fps = 1;
 var render = function () {
 var thisLoop = new Date;
-var fps = 1000 / (thisLoop - lastLoop);
+fps = 1000 / (thisLoop - lastLoop);
 lastLoop = thisLoop;
 requestAnimationFrame(render);
 renderer.render(scene, camera);
@@ -253,7 +298,7 @@ for (counter = 0; counter < bullets.length; counter++) {
 	else {
     	if (modes[counter] == "port1") {
     		voxcolbulltempnum = findCol(bullets[counter].position.x - (0.5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (0.5 * Math.tan(bullets[counter].rotation.x))/fps - 0.5, bullets[counter].position.z - (0.5 * Math.cos(bullets[counter].rotation.y))/fps);
-			voxels[voxcolbulltempnum].material = new THREE.MeshBasicMaterial( {color: 0xFFCC00} );
+			voxels[voxcolbulltempnum].material = new THREE.MeshLambertMaterial( {color: 0xFFCC00} );
     		scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
     		modes.splice(counter, 1);
@@ -261,7 +306,7 @@ for (counter = 0; counter < bullets.length; counter++) {
     	}
     	if (modes[counter] == "port2") {
 			voxcolbulltempnum = findCol(bullets[counter].position.x - (0.5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (0.5 * Math.tan(bullets[counter].rotation.x))/fps - 0.5, bullets[counter].position.z - (0.5 * Math.cos(bullets[counter].rotation.y))/fps);
-    		voxels[voxcolbulltempnum].material = new THREE.MeshBasicMaterial( {color: 0x00CCFF} );
+    		voxels[voxcolbulltempnum].material = new THREE.MeshLambertMaterial( {color: 0x00CCFF} );
     		scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
     		modes.splice(counter, 1);
@@ -289,6 +334,8 @@ for (counter = 0; counter < bullets.length; counter++) {
 			initColours[voxels.length] = 3;
 			voxels[voxels.length] = new THREE.Mesh(voxgeometry, voxmaterial);
     		scene.add(voxels[voxels.length-1]);
+    		voxels[voxels.length-1].castShadow = true;
+			voxels[voxels.length-1].receiveShadow = true;
     		voxels[voxels.length-1].position.set(Math.round(bullets[counter].position.x), Math.round(bullets[counter].position.y), Math.round(bullets[counter].position.z));
 			scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
@@ -297,6 +344,23 @@ for (counter = 0; counter < bullets.length; counter++) {
 		}
     }
 }
+if (lightIncreasing == true) {
+	lightIntensity += 0.01/fps;
+	if (lightIntensity >= 1) {
+		lightIncreasing = false;
+	}
+}
+if (lightIncreasing == false) {
+	lightIntensity -= 0.01/fps;
+	if (lightIntensity <= 0) {
+		lightIncreasing = true;
+	}
+}
+directionalLight1.intensity = lightIntensity;
+directionalLight2.intensity = lightIntensity;
+directionalLight3.intensity = lightIntensity;
+directionalLight5.intensity = lightIntensity;
+directionalLight6.intensity = lightIntensity;
 };
 render();
 function testCol(xcol, ycol, zcol) {
@@ -333,6 +397,8 @@ function initialRender() {
 				voxels[voxarrindnum].position.x = x;
 				voxels[voxarrindnum].position.y = y;
 				voxels[voxarrindnum].position.z = z;
+				voxels[voxarrindnum].castShadow = true;
+				voxels[voxarrindnum].receiveShadow = true;
 				voxarrindnum++;
 			}
 		}
