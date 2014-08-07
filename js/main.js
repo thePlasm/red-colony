@@ -345,13 +345,13 @@ for (counter = 0; counter < bullets.length; counter++) {
     }
 }
 if (lightIncreasing == true) {
-	lightIntensity += 0.01/fps;
+	lightIntensity += 0.005/fps;
 	if (lightIntensity >= 1) {
 		lightIncreasing = false;
 	}
 }
 if (lightIncreasing == false) {
-	lightIntensity -= 0.01/fps;
+	lightIntensity -= 0.005/fps;
 	if (lightIntensity <= 0) {
 		lightIncreasing = true;
 	}
