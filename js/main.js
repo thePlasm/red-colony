@@ -7,38 +7,25 @@ renderer.shadowMapEnabled = true;
 renderer.shadowMapSoft = false;
 document.body.appendChild(renderer.domElement);
 var canvas = document.querySelector('canvas');
-var lightIncreasing = false;
-var lightIntensity = 1;
-var directionalLight1 = new THREE.DirectionalLight( 0xffffff, lightIntensity);
-directionalLight1.position.set(0, 1, 0);
-scene.add(directionalLight1);
-directionalLight1.shadowCameraNear = 0.01;
-directionalLight1.castShadow = true;
-directionalLight1.shadowDarkness = 0.5;
-var directionalLight2 = new THREE.DirectionalLight( 0xffffff, lightIntensity);
-directionalLight2.position.set(1, 1, 0);
-scene.add(directionalLight2);
-directionalLight2.shadowCameraNear = 0.01;
-directionalLight2.castShadow = true;
-directionalLight2.shadowDarkness = 0.5;
-var directionalLight3 = new THREE.DirectionalLight( 0xffffff, lightIntensity);
-directionalLight3.position.set(0, 1, 1);
-scene.add(directionalLight3);
-directionalLight3.shadowCameraNear = 0.01;
-directionalLight3.castShadow = true;
-directionalLight3.shadowDarkness = 0.5;
-var directionalLight5 = new THREE.DirectionalLight( 0xffffff, lightIntensity);
-directionalLight5.position.set(-1, 1, 0);
-scene.add(directionalLight5);
-directionalLight5.shadowCameraNear = 0.01;
-directionalLight5.castShadow = true;
-directionalLight5.shadowDarkness = 0.5;
-var directionalLight6 = new THREE.DirectionalLight( 0xffffff, lightIntensity);
-directionalLight6.position.set(0, 1, -1);
-scene.add(directionalLight6);
-directionalLight6.shadowCameraNear = 0.01;
-directionalLight6.castShadow = true;
-directionalLight6.shadowDarkness = 0.5;
+var sunAngle = 0;
+var sun = new THREE.DirectionalLight( 0xffffff, 1);
+sun.position.set(0, 1, 0);
+scene.add(sun);
+sun.shadowCameraNear = 0.01;
+sun.castShadow = true;
+sun.shadowDarkness = 0.5;
+var sunneg = new THREE.DirectionalLight( 0xffffff, 1);
+sunneg.position.set(0, 1, 0);
+scene.add(sunneg);
+sunneg.shadowCameraNear = 0.01;
+sunneg.castShadow = true;
+sunneg.shadowDarkness = 0.5;
+var sunpos = new THREE.DirectionalLight( 0xffffff, 1);
+sunpos.position.set(0, 1, 0);
+scene.add(sunpos);
+sunpos.shadowCameraNear = 0.01;
+sunpos.castShadow = true;
+sunpos.shadowDarkness = 0.5;
 var voxgeometry = new THREE.BoxGeometry(1, 1, 1);
 var voxmaterial = new THREE.MeshLambertMaterial( {color: 0x888888} );
 var voxmaterial1 = new THREE.MeshLambertMaterial( {color: 0xF06D41} );
@@ -225,6 +212,7 @@ fps = 1000 / (thisLoop - lastLoop);
 lastLoop = thisLoop;
 requestAnimationFrame(render);
 renderer.render(scene, camera);
+sunAngle += (Math.PI/600)/fps;
 if (Key.isDown(Key.ONE)) {
 	mode = "port1";
 }
@@ -344,23 +332,9 @@ for (counter = 0; counter < bullets.length; counter++) {
 		}
     }
 }
-if (lightIncreasing == true) {
-	lightIntensity += 0.005/fps;
-	if (lightIntensity >= 1) {
-		lightIncreasing = false;
-	}
-}
-if (lightIncreasing == false) {
-	lightIntensity -= 0.005/fps;
-	if (lightIntensity <= 0) {
-		lightIncreasing = true;
-	}
-}
-directionalLight1.intensity = lightIntensity;
-directionalLight2.intensity = lightIntensity;
-directionalLight3.intensity = lightIntensity;
-directionalLight5.intensity = lightIntensity;
-directionalLight6.intensity = lightIntensity;
+sun.position.set(Math.sin(sunAngle), Math.cos(sunAngle), 0);
+sunneg.position.set(Math.sin(sunAngle), Math.cos(sunAngle), -1);
+sunpos.position.set(Math.sin(sunAngle), Math.cos(sunAngle), 1);
 };
 render();
 function testCol(xcol, ycol, zcol) {
