@@ -312,16 +312,16 @@ this.camera.rotation.order = "YXZ";
 
 //Bullet Movement
 for (counter = 0; counter < bullets.length; counter++) {
-    if (testCol(bullets[counter].position.x - (0.5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (0.5 * Math.tan(bullets[counter].rotation.x))/fps, bullets[counter].position.z - (0.5 * Math.cos(bullets[counter].rotation.y))/fps)) {
-		bullets[counter].position.x -= (0.5 * Math.sin(bullets[counter].rotation.y))/fps;
-    	bullets[counter].position.y += (0.5 * Math.tan(bullets[counter].rotation.x))/fps;
-		bullets[counter].position.z -= (0.5 * Math.cos(bullets[counter].rotation.y))/fps;
+    if (testCol(bullets[counter].position.x - (5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (5 * Math.tan(bullets[counter].rotation.x))/fps, bullets[counter].position.z - (5 * Math.cos(bullets[counter].rotation.y))/fps)) {
+		bullets[counter].position.x -= (5 * Math.sin(bullets[counter].rotation.y))/fps;
+    	bullets[counter].position.y += (5 * Math.tan(bullets[counter].rotation.x))/fps;
+		bullets[counter].position.z -= (5 * Math.cos(bullets[counter].rotation.y))/fps;
     }
 	else {
 	
 		//Collisions
     	if (modes[counter] == "port1") {
-    		voxcolbulltempnum = findCol(bullets[counter].position.x - (0.5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (0.5 * Math.tan(bullets[counter].rotation.x))/fps - 0.5, bullets[counter].position.z - (0.5 * Math.cos(bullets[counter].rotation.y))/fps);
+    		voxcolbulltempnum = findCol(bullets[counter].position.x - (5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (5 * Math.tan(bullets[counter].rotation.x))/fps - 0.5, bullets[counter].position.z - (5 * Math.cos(bullets[counter].rotation.y))/fps);
 			voxels[voxcolbulltempnum].material = new THREE.MeshLambertMaterial( {color: 0xFFCC00} );
     		scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
@@ -329,7 +329,7 @@ for (counter = 0; counter < bullets.length; counter++) {
 			bullarrindexnum--;
     	}
     	if (modes[counter] == "port2") {
-			voxcolbulltempnum = findCol(bullets[counter].position.x - (0.5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (0.5 * Math.tan(bullets[counter].rotation.x))/fps - 0.5, bullets[counter].position.z - (0.5 * Math.cos(bullets[counter].rotation.y))/fps);
+			voxcolbulltempnum = findCol(bullets[counter].position.x - (5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (5 * Math.tan(bullets[counter].rotation.x))/fps - 0.5, bullets[counter].position.z - (5 * Math.cos(bullets[counter].rotation.y))/fps);
     		voxels[voxcolbulltempnum].material = new THREE.MeshLambertMaterial( {color: 0x00CCFF} );
     		scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
@@ -337,7 +337,7 @@ for (counter = 0; counter < bullets.length; counter++) {
 			bullarrindexnum--;
     	}
 		if (modes[counter] == "restore") {
-    		voxcolbulltempnum = findCol(bullets[counter].position.x - (0.5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (0.5 * Math.tan(bullets[counter].rotation.x))/fps - 0.5, bullets[counter].position.z - (0.5 * Math.cos(bullets[counter].rotation.y))/fps);
+    		voxcolbulltempnum = findCol(bullets[counter].position.x - (5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (5 * Math.tan(bullets[counter].rotation.x))/fps - 0.5, bullets[counter].position.z - (5 * Math.cos(bullets[counter].rotation.y))/fps);
 			restoration(voxcolbulltempnum);
     		scene.remove(bullets[counter]);
     		bullets.splice(counter, 1);
@@ -345,7 +345,7 @@ for (counter = 0; counter < bullets.length; counter++) {
     		bullarrindexnum--;
 		}
 		if (modes[counter] == "destroy") {
-    		voxcolbulltempnum = findCol(bullets[counter].position.x - (0.5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (0.5 * Math.tan(bullets[counter].rotation.x))/fps - 0.5, bullets[counter].position.z - (0.5 * Math.cos(bullets[counter].rotation.y))/fps);
+    		voxcolbulltempnum = findCol(bullets[counter].position.x - (5 * Math.sin(bullets[counter].rotation.y))/fps, bullets[counter].position.y + (5 * Math.tan(bullets[counter].rotation.x))/fps - 0.5, bullets[counter].position.z - (5 * Math.cos(bullets[counter].rotation.y))/fps);
     		scene.remove(voxels[voxcolbulltempnum]);
 			voxels.splice(voxcolbulltempnum, 1);
 			initColours.splice(voxcolbulltempnum, 1);
