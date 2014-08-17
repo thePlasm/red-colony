@@ -91,7 +91,7 @@
 		<script src="js/three.min.js"></script>
 		<script src="js/main.js"></script>
 		<div id="hud">
-			<div id='info' onclick='this.innerHTML=""; document.getElementById("showbutton").innerHTML="Click to show info";'>
+			<div id='info' onclick='this.hidden=true; document.getElementById("showbutton").hidden=false;'>
 				<h1>
 					Red Colony
 				</h1>
@@ -104,7 +104,8 @@
 				</p>
 			</div>
 			<img src="media/Crosshairs.png" alt="+">
-			<div id='showbutton' onclick='this.innerHTML=""; document.getElementById("info").innerHTML="<h1>Red Colony</h1><h2>By Rasmus Jepsen, with three.js.</h2><p>Instructions can be found <a href=\"README.md\">here.</a><br />The license file can be found <a href=\"LICENSE.md\">here.</a></p>";'>
+			<div id='showbutton' onclick='this.hidden=true; document.getElementById("info").hidden=false;'>
+				Click to show info
 			</div> 
 		</div>
 	</body>
