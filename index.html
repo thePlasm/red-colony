@@ -4,6 +4,7 @@
 		<meta charset="utf-8" lang="en-GB"/>
 		<meta name="description" content="A Mars Colonisation Game by Rasmus 'thePlasm' Jepsen, with three.js.">
 		<meta name="author" content="Rasmus 'thePlasm' Jepsen">
+        <link href='http://fonts.googleapis.com/css?family=Nova+Square' rel='stylesheet' type='text/css'>
 		<title>
 			Red Colony
 		</title>
@@ -12,9 +13,9 @@
 				margin: 0px;
 				padding: 0px;
 				text-align: center;
-				background-color:#FFFFFF;
-				color:#000000;
-				font-family:"Arial", Arial, sans-serif;
+				background-color: #FFFFFF;
+				color: #000000;
+				font-family: "Nova Square", "Arial", Arial, sans-serif;
 			}
 			canvas {
 				margin:0px;
@@ -46,17 +47,17 @@
 				position: fixed;
 			}
 			#info {
-				color: #FFCC00;
-				font-size:50%;
-				width:200px;
-				top:0%;
-				left: calc(50% - 200px/2);
-				left: -moz-calc(50% - 200px/2);
-				left: -o-calc(50% - 200px/2);
-				left: -webkit-calc(50% - 200px/2);
+                perspective: 150px;
+				color: rgb(218, 242, 255);
+                text-shadow: 0 0 14px rgba(14, 200, 255, 0.75);
+				width: 60%;
+				top: -5px;
+                left: -5px;
 				position: fixed;
-				border: 1px solid #003b6f;
-				background-color: #00CCFF;
+				border: 5px solid rgba(186, 224, 255, 0.76);
+                border-radius: 0 0 20px 0;
+                box-shadow: 0 0 40px rgba(186, 224, 255, 0.76);
+				background-color: rgba(0, 204, 255, 0.50);
 			}
 			#showbutton {
 				color: #FFCC00;
@@ -92,13 +93,13 @@
 		<script src="js/main.js"></script>
 		<div id="hud">
 			<div id='info' onclick='this.hidden=true; document.getElementById("showbutton").hidden=false;'>
-				<h1>
+				<h1 style="position: relative; left: 100px; perspective: 150px; transform: rotateY(8deg);">
 					Red Colony
 				</h1>
-				<h2>
+				<h2 style="position: relative; left: 100px; perspective: 150px; transform: rotateY(8deg);">
 					A Mars Colonisation Game by Rasmus 'thePlasm' Jepsen, with three.js.
 				</h2>
-				<p>
+				<p style="position: relative; left: 100px; perspective: 150px; transform: rotateY(8deg);">
 					Instructions can be found <a href='README.md'>here.</a><br />
 					The license file can be found <a href='LICENSE.md'>here.</a>
 				</p>
