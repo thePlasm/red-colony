@@ -1,7 +1,7 @@
 Red Colony
 =============
 
-Red Colony ([play now](http://theplasm.github.com/red-colony));
+Red Colony ([play now](http://theplasm.github.com/red-colony))
 
 
 Controls:
