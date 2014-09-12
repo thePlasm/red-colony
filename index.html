@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang='en'>
+	<head lang='en'>
+		<meta charset="utf-8" lang="en-GB"/>
+		<meta name="description" content="A Mars Colonisation Game by Rasmus 'thePlasm' Jepsen, with three.js.">
+		<meta name="keywords" content="Mars, game, first person, Red Colony, Colonisation, threejs">
+		<meta name="author" content="https://plus.google.com/u/0/116529764959487609747">
+		<link href='http://fonts.googleapis.com/css?family=Nova+Square' rel='stylesheet' type='text/css'>
+		<link href='css/stylesheet.css' rel='stylesheet' type='text/css'>
+		<link href='README.md' rel='help' type='text/plain'>
+		<link href='LICENSE.md' rel='license' type='text/plain'>
+		<link href='https://plus.google.com/u/0/116529764959487609747' rel='author'>
+		<title>
+			Red Colony
+		</title>
+		<script>
+			window.onkeydown=function(e){
+  				if(e.keyCode==32) {
+   					return false;
+  				}
+  				if(e.keyCode==40) {
+   					return false;
+  				}
+  				if(e.keyCode==38) {
+   					return false;
+  				}
+			};
+		</script>
+	</head>
+	<body lang='en'>
+		<script src="js/three.min.js" defer></script>
+		<script src="js/main.js" defer></script>
+		<noscript>Your browser does not support JavaScript!</noscript> 
+		<div id="hud">
+			<div id='info' onclick='this.hidden=true; document.getElementById("showbutton").hidden=false;'>
+				<h1>
+					Red Colony
+				</h1>
+				<h2>
+					A Mars Colonisation Game by Rasmus 'thePlasm' Jepsen, with three.js.
+				</h2>
+				<p>
+					Instructions can be found <a href='README.md'>here.</a><br />
+					The license file can be found <a href='LICENSE.md'>here.</a>
+				</p>
+			</div>
+			<img src="media/Crosshairs.png" alt="+">
+			<div id='showbutton' onclick='this.hidden=true; document.getElementById("info").hidden=false;' hidden>
+				Click to show info
+			</div> 
+		</div>
+	</body>
+</html>
