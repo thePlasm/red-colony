@@ -60,6 +60,10 @@ var lastLoop = new Date;
 var sensitivity = 0.005;
 var fps;
 var thisLoop = new Date;
+var gravBool = false;
+var jumpable = false;
+var velocity = new THREE.Vector3(0, 0, 0);
+var gravPressed = false;
 
 //Placing objects around the scene
 sun.position.set(0, 1, 0);
@@ -84,6 +88,7 @@ camera.position.set(spawnx - 0.5, spawny + 1.75, spawnz - 0.5);
 //Keyboard
 var Key = {
 _pressed: {},
+	G: 71,
 	E: 69,
 	R: 82,	
    	A: 65,
@@ -281,16 +286,57 @@ if (Key.isDown(Key.D)) {
     }
 }
 if (Key.isDown(Key.SPACE)) {
-	if (testCol(camera.position.x, (camera.position.y + 2 / fps), camera.position.z)) {
-		this.camera.position.y += 2 / fps;
+	if (!gravBool) {
+		if (testCol(camera.position.x, (camera.position.y + 2 / fps), camera.position.z)) {
+			this.camera.position.y += 2 / fps;
+		}
+	}
+	if (gravBool) {
+		if (jumpable) {
+			velocity.y += 25/fps;
+			jumpable = false;
+		}
 	}
 }
 if (Key.isDown(Key.SHIFT)) {
-	if (testCol(camera.position.x, (camera.position.y - 2 / fps)-1.75, camera.position.z)) {
-		this.camera.position.y -= 2 / fps;
+	if (!gravBool) {
+		if (testCol(camera.position.x, (camera.position.y - 2 / fps)-1.75, camera.position.z)) {
+			this.camera.position.y -= 2 / fps;
+		}
 	}
 }
-
+if (gravBool) {
+	if (velocity.y != 0) {
+		console.log(velocity);
+	}
+	if (testCol(camera.position.x+(velocity.x), camera.position.y-1.75, camera.position.z)) {
+		camera.position.x += velocity.x;
+	}
+	if (testCol(camera.position.x, camera.position.y-1.75, camera.position.z+(velocity.z/fps))) {
+		camera.position.z += velocity.z;
+	}
+	if (testCol(camera.position.x, camera.position.y-1.75+(velocity.y), camera.position.z)) {
+		camera.position.y += velocity.y;
+	}
+	if (!testCol(camera.position.x, camera.position.y-1.75+(velocity.y), camera.position.z)) {
+		jumpable = true;
+		velocity.y = 0;
+	}
+	if (testCol(camera.position.x, camera.position.y-1.75-(3.711/fps), camera.position.z)) {
+		velocity.y -= 3.711/fps;
+	}
+}
+if (Key.isDown(Key.G)) {
+	if (!gravPressed) {
+		gravBool = !gravBool;
+		jumpable = false;
+		velocity.set(0, 0, 0);
+		gravPressed = true;
+	}
+}
+if (!Key.isDown(Key.G)) {
+	gravPressed = false;
+}
 //reset bullets and spawn
 if (Key.isDown(Key.R)) {
     camera.rotation.set(0, 0, 0);
