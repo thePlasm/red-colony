@@ -13,7 +13,7 @@ gulp.task('uglify', function () {
 });
 
 gulp.task('stylus', function () {
-	return gulp.src('lib/red-colony/assets/stylus/**.styl')
+	return gulp.src('styl/**.styl')
 		.pipe(concat('main.min.styl'))
 		.pipe(stylus())
 		.pipe(gulp.dest('wwwroot/css'));
@@ -24,8 +24,8 @@ gulp.task('serve', ['uglify', 'stylus'], function () {
 		server: 'wwwroot'
 	});
 
-	gulp.watch('lib/js/**.js', ['uglify']).on('change', browsersync.reload);
-	gulp.watch('lib/styl/**.styl', ['stylus']).on('change', browsersync.reload);
+	gulp.watch('lib/red-colony/**.js', ['uglify']).on('change', browsersync.reload);
+	gulp.watch('styl/**.styl', ['stylus']).on('change', browsersync.reload);
 });
 
 gulp.task('default', ['uglify', 'stylus']);
