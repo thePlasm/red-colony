@@ -13,7 +13,7 @@ gulp.task('uglify', function () {
 });
 
 gulp.task('stylus', function () {
-	return gulp.src('lib/red-colony/stylus/**.styl')
+	return gulp.src('lib/red-colony/assets/stylus/**.styl')
 		.pipe(concat('main.min.styl'))
 		.pipe(stylus())
 		.pipe(gulp.dest('wwwroot/css'));
