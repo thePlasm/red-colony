@@ -6,14 +6,14 @@ var gulp 	= require('gulp'),
     browsersync = require('browser-sync').create();
 
 gulp.task('uglify', function () {
-	return gulp.src('lib/js/**.js')
+	return gulp.src('lib/red-colony/**.js')
 		.pipe(concat('main.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('wwwroot/js'));
 });
 
 gulp.task('stylus', function () {
-	return gulp.src('lib/styl/**.styl')
+	return gulp.src('lib/red-colony/stylus/**.styl')
 		.pipe(concat('main.min.styl'))
 		.pipe(stylus())
 		.pipe(gulp.dest('wwwroot/css'));
